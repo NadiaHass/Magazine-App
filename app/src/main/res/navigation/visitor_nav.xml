@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/visitor_nav"
+    app:startDestination="@id/articlesFragment">
+
+    <fragment
+        android:id="@+id/articlesFragment"
+        android:name="com.nadiahassouni.magazine.ui.reader.ArticlesFragment"
+        android:label="fragment_articles"
+        tools:layout="@layout/fragment_articles" >
+        <action
+            android:id="@+id/action_articlesFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.nadiahassouni.magazine.ui.reader.CategoriesFragment"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_categoryArticlesFragment"
+            app:destination="@id/categoryArticlesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/magazineFragment"
+        android:name="com.nadiahassouni.magazine.ui.reader.MagazineFragment"
+        android:label="fragment_magazine"
+        tools:layout="@layout/fragment_magazine" >
+        <action
+            android:id="@+id/action_magazineFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileVisitorFragment"
+        android:name="com.nadiahassouni.magazine.ui.visitor.ProfileVisitorFragment"
+        android:label="fragment_profile_visitor"
+        tools:layout="@layout/fragment_profile_visitor" />
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.nadiahassouni.magazine.ui.reader.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article" />
+    <fragment
+        android:id="@+id/categoryArticlesFragment"
+        android:name="com.nadiahassouni.magazine.ui.reader.CategoryArticlesFragment"
+        android:label="fragment_category_articles"
+        tools:layout="@layout/fragment_category_articles" >
+        <action
+            android:id="@+id/action_categoryArticlesFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
+</navigation>
