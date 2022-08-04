@@ -24,6 +24,7 @@ class SignInFragment : Fragment() {
         _binding = FragmentSignInBinding.inflate(inflater , container , false)
 
         binding.btnSignIn.setOnClickListener {
+            showProgressBar()
             signInUser()
         }
         binding.tvCreateAccount.setOnClickListener {
@@ -49,6 +50,7 @@ class SignInFragment : Fragment() {
                             signOut()
                             Toast.makeText(context , "Verifiez votre compte pour pouvoir y acceder . Un email de verification est envoye" , Toast.LENGTH_LONG).show()
                         }
+                        hideProgressBar()
                     }
                 }
                 .addOnFailureListener(requireActivity()){
@@ -79,5 +81,13 @@ class SignInFragment : Fragment() {
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         activity?.finish()
+    }
+
+    private fun showProgressBar() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        binding.progressBar.visibility = View.GONE
     }
 }

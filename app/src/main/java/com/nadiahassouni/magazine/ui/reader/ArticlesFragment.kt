@@ -55,7 +55,6 @@ class ArticlesFragment : Fragment() {
         try {
             val articleCollectionRef = Firebase.firestore.collection("articles")
             val querySnapshot = articleCollectionRef
-                .whereNotEqualTo("category" , "magazine")
                 .whereEqualTo("state" , "valide")
                 .whereEqualTo("type" , "article")
                 .get().await()

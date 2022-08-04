@@ -26,7 +26,6 @@ class ArticleAdapter (
         var tvDate: TextView = view.findViewById(R.id.tv_date)
         var tvCategory: TextView = view.findViewById(R.id.tv_category)
         var imageView: ImageView = view.findViewById(R.id.iv_article)
-//        var layout : CardView = view.findViewById(R.id.cardView)
 
     }
 
@@ -47,18 +46,18 @@ class ArticleAdapter (
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
             bundle.putSerializable("article" , articlesList.get(position))
-            when (fragment){
-                "articles" ->{
-                    Navigation.findNavController(holder.itemView).navigate(R.id.action_articlesFragment_to_articleFragment , bundle)
-                }
-                "magazines" ->{
-                    Navigation.findNavController(holder.itemView).navigate(R.id.action_magazineFragment_to_articleFragment , bundle)
+            try {
+                when (fragment){
+                    "articles" ->{
+                        Navigation.findNavController(holder.itemView).navigate(R.id.action_articlesFragment_to_articleFragment , bundle)
+                    }
+                    "categories"->{
+                    Navigation.findNavController(holder.itemView).navigate(R.id.action_categoryArticlesFragment_to_articleFragment , bundle)
 
+                    }
                 }
-                "categories"->{
-//                    Navigation.findNavController(holder.itemView).navigate(R.id.action_categoryArticlesFragment_to_articleFragment , bundle)
+            }catch (e : Exception){
 
-                }
             }
         }
     }

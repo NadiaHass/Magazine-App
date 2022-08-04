@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -45,7 +46,7 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun navigateToSearchFragment() {
-
+        Navigation.findNavController(binding.root).navigate(R.id.action_categoriesFragment_to_searchFragment)
     }
 
     override fun onStart() {

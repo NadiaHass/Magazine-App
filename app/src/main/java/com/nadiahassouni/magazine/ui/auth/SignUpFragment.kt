@@ -30,6 +30,7 @@ class SignUpFragment : Fragment() {
         _binding = FragmentSignUpBinding.inflate(inflater , container , false)
 
         binding.btnSignUp.setOnClickListener {
+            showProgressBar()
             signUpNewUser()
         }
 
@@ -51,6 +52,7 @@ class SignUpFragment : Fragment() {
                     val user = getUser()
                     sendVerificationEmail()
                     storeUserProfileData(user)
+                    hideProgressBar()
                 } else {
                     Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
@@ -99,5 +101,13 @@ class SignUpFragment : Fragment() {
 
     private fun navigateToSignInFragment() {
         Navigation.findNavController(binding.root).navigate(R.id.action_signUpFragment_to_signInFragment)
+    }
+
+    private fun showProgressBar() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        binding.progressBar.visibility = View.GONE
     }
 }

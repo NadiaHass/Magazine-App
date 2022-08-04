@@ -2,11 +2,13 @@ package com.nadiahassouni.magazine.adapters
 
 import android.content.Context
 import android.net.Uri
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nadiahassouni.magazine.R
@@ -38,6 +40,14 @@ class MagazineAdapter(
         holder.tvTitle.text = articlesList[position].title
         Glide.with(context)
             .load(Uri.parse(articlesList[position].imageUrl))
-            .into(holder.imageView)    }
+            .into(holder.imageView)
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable("article" , articlesList.get(position))
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_magazineFragment_to_articleFragment , bundle)
+
+        }
+
+    }
 
 }
