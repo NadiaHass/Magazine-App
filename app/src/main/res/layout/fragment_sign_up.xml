@@ -14,10 +14,10 @@
         android:indeterminateTint="@color/red"
         android:visibility="gone"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/btn_signUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/et_password" />
 
     <TextView
         android:id="@+id/textView"
@@ -120,7 +120,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="74dp"
-        android:text="Se connecter"
+        android:text="Creer un compte"
         android:background="@drawable/button_background"
         android:textAllCaps="false"
         android:textColor="@color/white"

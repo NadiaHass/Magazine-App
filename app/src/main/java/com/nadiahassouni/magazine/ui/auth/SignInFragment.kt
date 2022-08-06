@@ -24,7 +24,6 @@ class SignInFragment : Fragment() {
         _binding = FragmentSignInBinding.inflate(inflater , container , false)
 
         binding.btnSignIn.setOnClickListener {
-            showProgressBar()
             signInUser()
         }
         binding.tvCreateAccount.setOnClickListener {
@@ -39,24 +38,34 @@ class SignInFragment : Fragment() {
     }
 
     private fun signInUser() {
-        if(checkInputNotEmpty()){
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(binding.etEmail.text.toString() ,binding.etPassword.text.toString() )
-                .addOnCompleteListener(requireActivity()){ task->
-                    if(task.isSuccessful){
-                        if(emailIsVerified()){
-                            openReaderActivity()
-                        }else{
-                            sendVerificationEmail()
-                            signOut()
-                            Toast.makeText(context , "Verifiez votre compte pour pouvoir y acceder . Un email de verification est envoye" , Toast.LENGTH_LONG).show()
+        try {
+            if(checkInputNotEmpty()){
+                showProgressBar()
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(binding.etEmail.text.toString() ,binding.etPassword.text.toString() )
+                    .addOnCompleteListener(requireActivity()){ task->
+                        if(task.isSuccessful){
+                            if(emailIsVerified()){
+                                openReaderActivity()
+                            }else{
+                                sendVerificationEmail()
+                                signOut()
+                                Toast.makeText(context , "Verifiez votre compte pour pouvoir y acceder . Un email de verification est envoye" , Toast.LENGTH_LONG).show()
+                            }
+                            hideProgressBar()
                         }
+                    }
+                    .addOnFailureListener(requireActivity()){
+                        Toast.makeText(context , "$it",Toast.LENGTH_LONG).show()
                         hideProgressBar()
                     }
-                }
-                .addOnFailureListener(requireActivity()){
-                    Toast.makeText(context , "$it",Toast.LENGTH_LONG).show()
-                }
+            }else{
+                Toast.makeText(context , " Veillez complétez tous les champs !" , Toast.LENGTH_LONG).show()
+            }
+        }catch (e : Exception){
+            hideProgressBar()
+
         }
+
     }
 
     private fun signOut() {
@@ -72,8 +81,8 @@ class SignInFragment : Fragment() {
     }
 
     private fun checkInputNotEmpty(): Boolean {
-        return (binding.etEmail.text.toString() != "" &&
-                binding.etPassword.text.toString() != "")
+        return (binding.etEmail.text.toString().isNotEmpty() &&
+                binding.etPassword.text.toString().isNotEmpty())
     }
 
     private fun openReaderActivity() {
@@ -85,9 +94,11 @@ class SignInFragment : Fragment() {
 
     private fun showProgressBar() {
         binding.progressBar.visibility = View.VISIBLE
+        binding.btnSignIn.visibility = View.GONE
     }
 
     private fun hideProgressBar() {
         binding.progressBar.visibility = View.GONE
+        binding.btnSignIn.visibility = View.VISIBLE
     }
 }

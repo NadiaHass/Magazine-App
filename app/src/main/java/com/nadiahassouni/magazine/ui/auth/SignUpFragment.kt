@@ -30,7 +30,6 @@ class SignUpFragment : Fragment() {
         _binding = FragmentSignUpBinding.inflate(inflater , container , false)
 
         binding.btnSignUp.setOnClickListener {
-            showProgressBar()
             signUpNewUser()
         }
 
@@ -39,6 +38,7 @@ class SignUpFragment : Fragment() {
 
     private fun signUpNewUser() {
         if(checkInputNotEmpty()){
+            showProgressBar()
             addUserToFirebase(binding.etEmail.text.toString() , binding.etPassword.text.toString())
         }else{
             Toast.makeText(context , " Veillez complétez tous les champs !" , Toast.LENGTH_LONG).show()
@@ -46,17 +46,22 @@ class SignUpFragment : Fragment() {
     }
 
     private fun addUserToFirebase(email : String, password : String) {
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email , password)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    val user = getUser()
-                    sendVerificationEmail()
-                    storeUserProfileData(user)
-                    hideProgressBar()
-                } else {
-                    Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
+        try {
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email , password)
+                .addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        val user = getUser()
+                        sendVerificationEmail()
+                        storeUserProfileData(user)
+                        hideProgressBar()
+                    } else {
+                        Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        hideProgressBar()
+                    }
                 }
-            }
+        }catch (e : Exception){
+            hideProgressBar()
+        }
     }
 
     private fun getUser(): User {
@@ -105,9 +110,11 @@ class SignUpFragment : Fragment() {
 
     private fun showProgressBar() {
         binding.progressBar.visibility = View.VISIBLE
+        binding.btnSignUp.visibility = View.GONE
     }
 
     private fun hideProgressBar() {
         binding.progressBar.visibility = View.GONE
+        binding.btnSignUp.visibility = View.VISIBLE
     }
 }

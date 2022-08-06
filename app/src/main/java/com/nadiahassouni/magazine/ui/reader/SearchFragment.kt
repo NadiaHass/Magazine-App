@@ -8,9 +8,11 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.nadiahassouni.magazine.R
 import com.nadiahassouni.magazine.adapters.ArticleAdapter
 import com.nadiahassouni.magazine.databinding.FragmentSearchBinding
 import com.nadiahassouni.magazine.model.Article
@@ -32,6 +34,8 @@ class SearchFragment : Fragment() {
     ): View{
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
 
+        hideBottomNav()
+
         binding.serchView.setOnQueryTextListener(object :  SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return true
@@ -46,6 +50,10 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
+    private fun hideBottomNav() {
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNav!!.visibility = View.GONE
+    }
 
     private fun getArticles(input : String) = CoroutineScope(Dispatchers.IO).launch {
         var article: Article?

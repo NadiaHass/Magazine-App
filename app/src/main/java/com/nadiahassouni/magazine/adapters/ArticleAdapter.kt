@@ -37,7 +37,7 @@ class ArticleAdapter (
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.tvTitle.text = articlesList[position].title
-        holder.tvCategory.text = articlesList[position].category
+        holder.tvCategory.text = "#"+ articlesList[position].category
         holder.tvDate.text = articlesList[position].date
         Glide.with(context)
             .load(Uri.parse(articlesList[position].imageUrl))
