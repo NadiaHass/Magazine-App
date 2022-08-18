@@ -59,7 +59,7 @@ class SearchFragment : Fragment() {
         var article: Article?
 
         try {
-            if(input.length > 0){
+            if(input.isNotEmpty()){
                 var recherche = input.substring(0,1).uppercase() + input.substring(1).lowercase()
                 val articleCollectionRef = Firebase.firestore.collection("articles")
                 val querySnapshot = articleCollectionRef
@@ -78,7 +78,6 @@ class SearchFragment : Fragment() {
                     binding.rvArticles.layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     binding.rvArticles.adapter = adapter
-                    hideProgressBar()
                 }
             }else{
                 withContext(Dispatchers.Main) {
@@ -88,7 +87,6 @@ class SearchFragment : Fragment() {
                     binding.rvArticles.layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     binding.rvArticles.adapter = adapter
-                    hideProgressBar()
                 }
             }
 
@@ -97,13 +95,5 @@ class SearchFragment : Fragment() {
                 Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
             }
         }
-    }
-
-    private fun showProgressBar() {
-        binding.progressBar.visibility = View.VISIBLE
-    }
-
-    private fun hideProgressBar() {
-        binding.progressBar.visibility = View.GONE
     }
 }

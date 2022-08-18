@@ -22,7 +22,6 @@ class MagazineAdapter(
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var tvDate: TextView = view.findViewById(R.id.tv_date)
         var tvTitle: TextView = view.findViewById(R.id.tv_title)
-        var tvCategory: TextView = view.findViewById(R.id.tv_category)
         var imageView: ImageView = view.findViewById(R.id.iv_article)
 
     }
@@ -38,7 +37,6 @@ class MagazineAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.tvDate.text = articlesList[position].date
         holder.tvTitle.text = articlesList[position].title
-        holder.tvCategory.text = "#" + articlesList[position].category
         Glide.with(context)
             .load(Uri.parse(articlesList[position].imageUrl))
             .into(holder.imageView)

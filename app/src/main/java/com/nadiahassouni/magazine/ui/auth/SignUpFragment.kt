@@ -70,7 +70,8 @@ class SignUpFragment : Fragment() {
             binding.etName.text.toString(),
             binding.etSurname.text.toString(),
             binding.etEmail.text.toString(),
-            " " , )
+            " " ,
+        "lecteur")
     }
 
     private fun storeUserProfileData(user: User) = CoroutineScope(Dispatchers.IO).launch {

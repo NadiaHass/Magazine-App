@@ -54,6 +54,8 @@ class CategoryArticlesFragment : Fragment() {
             val articleCollectionRef = Firebase.firestore.collection("articles")
             val querySnapshot = articleCollectionRef
                 .whereEqualTo("category" , category)
+                .whereEqualTo("type" , "article")
+                .whereEqualTo("state" , "valide")
                 .get().await()
             var list = ArrayList<Article>()
             for (doc in querySnapshot.documents) {

@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Magazine">
         <activity android:name=".ui.visitor.VisitorActivity"></activity>
-        <activity android:name=".ui.writer.WriterActivity" />
         <activity android:name=".ui.reader.ReaderActivity" />
         <activity android:name=".ui.splash.SplashActivity" >
             <intent-filter>

@@ -6,4 +6,5 @@ class User (
     var surname : String = "" ,
     var email : String = "" ,
     var imageUrl : String = ""  ,
+    var role : String = ""
         )

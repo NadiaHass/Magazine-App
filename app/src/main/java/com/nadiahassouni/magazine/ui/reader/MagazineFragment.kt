@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -38,6 +39,10 @@ class MagazineFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        showBottomNav()
+    }
     private fun showProgressBar() {
         binding.progressBar.visibility = View.VISIBLE
     }
@@ -74,5 +79,10 @@ class MagazineFragment : Fragment() {
                 Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun showBottomNav() {
+        val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNav!!.visibility = View.VISIBLE
     }
 }

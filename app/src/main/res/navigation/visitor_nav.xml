@@ -46,9 +46,5 @@
         android:id="@+id/categoryArticlesFragment"
         android:name="com.nadiahassouni.magazine.ui.reader.CategoryArticlesFragment"
         android:label="fragment_category_articles"
-        tools:layout="@layout/fragment_category_articles" >
-        <action
-            android:id="@+id/action_categoryArticlesFragment_to_articleFragment"
-            app:destination="@id/articleFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_category_articles" />
 </navigation>

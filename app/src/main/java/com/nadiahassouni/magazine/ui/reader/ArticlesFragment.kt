@@ -36,7 +36,6 @@ class ArticlesFragment : Fragment() {
     ): View{
         _binding = FragmentArticlesBinding.inflate(inflater, container, false)
 
-//        showBottomNav()
         showProgressBar()
         getArticles()
         getStories()
